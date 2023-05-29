@@ -10,5 +10,5 @@ features:
 - features\base\services.yml
 - features\base\components.yml
 - features\base\files.yml
-- features\base\config.yml
+#- features\base\config.yml
 - features\base\software.yml
