@@ -1,16 +1,8 @@
 
 cmd /c "del /q /f "%WINDIR%\HelpPane.exe""
 
-ame-hexer "%WINDIR%\Resources\Themes\aero\Shell\NormalColor\shellstyle.dll" "3c69662069643d2261746f6d2848656c70427574746f6e29223e" "3c69662069643d2261746f6d282d2d2d52454d4f56454429223e" 120000
-ame-hexer "%WINDIR%\Resources\Themes\aero\Shell\NormalColor\shellstyle.dll" "3c69662069643d2261746f6d2848656c70427574746f6e29223e" "3c69662069643d2261746f6d282d2d2d52454d4f56454429223e" 120000
-
-
 @echo OFF
 
-for /f "usebackq delims=" %%A in (`dir /b "%WINDIR%\SystemApps\*Client.CBS*"`) do (
-	echo del /q /f "%WINDIR%\SystemApps\%%A\SystemSettingsExtensions.dll"
-	del /q /f "%WINDIR%\SystemApps\%%A\SystemSettingsExtensions.dll"
-)
 
 for /f "usebackq tokens=2 delims=\" %%A in (`reg query "HKEY_USERS" ^| findstr /c:"Classes"`) do (
 		call :UICALL1 "%%A"
@@ -44,10 +36,6 @@ reg add "HKU\%~1\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /t REG_SZ
 exit /b 0
 
 :UICALL2
-
-@echo ON
-reg add "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_ShowClassicMode" /t REG_DWORD /D 1 /f
-
 reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /f
 reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "OldTaskbar" /t REG_DWORD /D 0 /f
 reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "UpdatePolicy" /t REG_DWORD /D 2 /f
@@ -66,12 +54,9 @@ reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "DisableOfficeHotkeys" /t REG_DWOR
 reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "DisableWinFHotkey" /t REG_DWORD /D 1 /f
 reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "DoNotRedirectProgramsAndFeaturesToSettingsApp" /t REG_DWORD /D 1 /f
 
-reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "HideIconAndTitleInExplorer" /t REG_DWORD /D 3 /f
-reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "IMEStyle" /t REG_DWORD /D 4 /f
-
 reg add "HKU\%~1\SOFTWARE\ExplorerPatcher" /v "MicaEffectOnTitlebar" /t REG_DWORD /D 1 /f
 
 reg add "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d 0 /f
-reg add "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 1 /f
+reg add "HKU\%~1\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 0 /f
 @echo OFF
 exit /b 0
