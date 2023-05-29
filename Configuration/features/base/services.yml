@@ -36,9 +36,6 @@ actions:
     name: "WMPNetworkSvc"
     operation: delete
   - !service:
-    name: "StorSvc"
-    operation: delete
-  - !service:
     name: "wisvc"
     operation: delete
   - !service:
@@ -67,9 +64,6 @@ actions:
     name: "SecurityHealthService"
   - !service:
     name: "SecurityHealthService"
-    operation: delete
-  - !service:
-    name: "wscsvc"
     operation: delete
   - !service:
     name: "UsoSvc"
@@ -102,9 +96,6 @@ actions:
     name: "dmwappushservice"
     operation: stop
   - !service:
-    name: "InstallService"
-    operation: delete
-  - !service:
     name: "LicenseManager"
     operation: stop
   - !service:
@@ -126,9 +117,6 @@ actions:
     name: "SharedAccess"
     operation: stop
   - !service:
-    name: "StorSvc"
-    operation: delete
-  - !service:
     name: "TrkWks"
     operation: stop
   - !service:
@@ -137,15 +125,6 @@ actions:
   - !service:
     name: "WMPNetworkSvc"
     operation: delete
-  - !service:
-    name: "XblAuthManager"
-    operation: stop
-  - !service:
-    name: "XblGameSave"
-    operation: stop
-  - !service:
-    name: "XboxNetApiSvc"
-    operation: stop
   - !service:
     name: "wlidsvc"
     operation: delete
