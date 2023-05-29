@@ -25,32 +25,26 @@ jobs:
         run: |
           mv EimiBook.7z EimiBook.apbx
 
-      - name: Get Latest Release Tag
-        id: get_latest_tag
-        run: |
-          latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v0.0.0")
-          echo "::set-output name=tag::$latest_tag"
-
-- name: Post to Discord Webhook
- env:
-    DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-  run: |
-    artifact_path="./EimiBook.apbx"
-    artifact_name="EimiBook.apbx"
+      - name: Post to Discord Webhook
+        env:
+            DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+            run: |
+                  artifact_path="./EimiBook.apbx"
+                  artifact_name="EimiBook.apbx"
     
-    curl -H "Content-Type: application/json" -X POST -d '{
-      "content": "New artifact uploaded!",
-      "embeds": [
-        {
-          "title": "Artifact Details",
-          "description": "An artifact has been created for the latest release.",
-          "fields": [
-            {
-              "name": "Artifact Name",
-              "value": "'"$artifact_name"'"
-            }
-          ]
-        }
-      ],
-      "file": "'"$artifact_path"'"
-    }' "$DISCORD_WEBHOOK_URL"
+                    curl -H "Content-Type: application/json" -X POST -d '{
+                   "content": "New artifact uploaded!",
+                   "embeds": [
+                              {
+                                "title": "Artifact Details",
+                                "description": "An artifact has been created for the latest release.",
+                                "fields": [
+                                            {
+                                              "name": "Artifact Name",
+                                              "value": "'"$artifact_name"'"
+                                            }
+                                          ]
+                              }
+                             ],
+                  "file": "'"$artifact_path"'"
+                    }' "$DISCORD_WEBHOOK_URL"
