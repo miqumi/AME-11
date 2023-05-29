@@ -11,7 +11,7 @@ actions:
   - !appx: {name: '*SecureAssessmentBrowser*', type: family}
   - !appx: {name: '*FeedbackHub*', type: family}
   - !appx: {name: '*MixedReality*', type: family}
-  - !appx: {name: '*Microsoft.Calculator*', type: family}
+ # - !appx: {name: '*Microsoft.Calculator*', type: family}
   - !appx: {name: '*Microsoft.WindowsAlarms*', type: family}
   - !appx: {name: '*Microsoft.GetHelp*', type: family}
   - !appx: {name: '*Getstarted*', type: family}
@@ -20,12 +20,12 @@ actions:
   - !appx: {name: '*WindowsCamera*', type: family}
   - !appx: {name: '*bing*', type: family}
   - !appx: {name: '*Sticky*', type: family}
-  - !appx: {name: '*Microsoft.WindowsStore*', type: family}
+#  - !appx: {name: '*Microsoft.WindowsStore*', type: family}
 
-  - !appx: {name: '*StorePurchaseApp*', type: family}
+#  - !appx: {name: '*StorePurchaseApp*', type: family}
 
   - !appx: {name: '*MicrosoftOfficeHub*', type: family}
-#  - !appx: {name: '*Paint*', type: family}
+  - !appx: {name: '*Paint*', type: family}
   - !appx: {name: '*wallet*', type: family}
   - !appx: {name: '*OneNote*', type: family}
   - !appx: {name: '*Microsoft.People*', type: family}
@@ -38,27 +38,27 @@ actions:
   - !appx: {name: '*WindowsSoundRecorder*', type: family}
   - !appx: {name: '*windowscommunicationsapps*', type: family}
   - !appx: {name: '*zune*', type: family}
-#  - !appx: {name: '*WindowsCalculator*', type: family}
+  - !appx: {name: '*WindowsCalculator*', type: family}
   - !appx: {name: '*WindowsMaps*', type: family}
   - !appx: {name: '*Sway*', type: family}
   - !appx: {name: '*CommsPhone*', type: family}
   - !appx: {name: '*ConnectivityStore*', type: family}
   - !appx: {name: '*Microsoft.Messaging*', type: family}
-  - !appx: {name: '*Microsoft.WindowsStore*', type: family}
-  - !appx: {name: '*XboxApp*', type: family}
+#  - !appx: {name: '*Microsoft.WindowsStore*', type: family}
+#  - !appx: {name: '*XboxApp*', type: family}
 
-  - !appx: {name: '*GamingApp*', type: family}
+#  - !appx: {name: '*GamingApp*', type: family}
 
-  - !appx: {name: '*XboxSpeechToTextOverlay*', type: family}
-  - !appx: {name: '*XboxGamingOverlay*', type: family}
+# - !appx: {name: '*XboxSpeechToTextOverlay*', type: family}
+# - !appx: {name: '*XboxGamingOverlay*', type: family}
 
   - !appx: {name: '*WebExperienceHost*', type: app}
 
-  - !appx: {name: '*XboxGameOverlay*', type: family}
+#  - !appx: {name: '*XboxGameOverlay*', type: family}
 
-  - !appx: {name: '*Xbox.TCUI*', type: family}
-  - !appx: {name: '*XboxGameCallableUI*', type: family}
-  - !appx: {name: '*XboxIdenitity*', type: family}
+#  - !appx: {name: '*Xbox.TCUI*', type: family}
+#  - !appx: {name: '*XboxGameCallableUI*', type: family}
+#  - !appx: {name: '*XboxIdenitity*', type: family}
 
   - !appx: {name: '*SecHealthUI*', type: family}
 
@@ -78,15 +78,15 @@ actions:
 
   - !appx: {name: '*MicrosoftTeams*', type: family}
   - !appx: {name: '*Clipchamp*', type: family}
-  - !appx: {name: '*WindowsTerminal*', type: family}
+#  - !appx: {name: '*WindowsTerminal*', type: family}
 
   - !appx: {name: '*Global.IrisService*', type: app}
-  - !appx: {name: '*Global.Accounts*', type: app}
+#  - !appx: {name: '*Global.Accounts*', type: app}
   - !appx: {name: '*Global.ValueBanner*', type: app}
 
   - !appx: {name: '*Client.CBS*', operation: clearCache}
-  - !appx: {name: '*StartMenuExperienceHost*', operation: clearCache}
-  - !appx: {name: '*Windows.Search*', operation: clearCache}
+#  - !appx: {name: '*StartMenuExperienceHost*', operation: clearCache}
+#  - !appx: {name: '*Windows.Search*', operation: clearCache}
 
 #  - !appx: {name: 'SystemSettingsExtensions.dll', type: Extension *Client.CBS*}
 #  - !appx: {name: 'SearchUx.InternalWebAPi.dll', type: Extension *Client.CBS*}
