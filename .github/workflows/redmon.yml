@@ -32,7 +32,8 @@ jobs:
       with:
         tag_name: ${{ steps.get_latest_tag.outputs.tag }}
         release_name: Release ${{ steps.get_latest_tag.outputs.tag }}
-        prerelease: 
+        draft: false
+        prerelease: true
         body: |
           This is an automated Pre-Release and has not been tested.
           I inspect each change thoroughly before pushing to Github, 
