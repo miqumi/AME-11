@@ -28,10 +28,9 @@ jobs:
       - name: Post to Discord Webhook
         env:
             DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+            artifact_path: "./EimiBook.apbx"
+            artifact_name: "EimiBook.apbx"
             run: |
-                  artifact_path="./EimiBook.apbx"
-                  artifact_name="EimiBook.apbx"
-    
                     curl -H "Content-Type: application/json" -X POST -d '{
                    "content": "New artifact uploaded!",
                    "embeds": [
