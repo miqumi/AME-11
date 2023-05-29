@@ -1,4 +1,5 @@
 name: push playbook
+
 on:
   push:
     branches:
@@ -9,47 +10,58 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: 7zip
-      run: |
-        sudo apt-get install p7zip-full -y
+      - name: 7zip
+        run: |
+          sudo apt-get install p7zip-full -y
 
-    - name: Create .7z
-      run: |
-        7za a -p'malte' -mhe=on EimiBook.7z ./*
+      - name: Create .7z
+        run: |
+          7za a -p'malte' -mhe=on EimiBook.7z ./*
 
-    - name: APBX boom
-      run: |
-        mv EimiBook.7z EimiBook.apbx
-        
-    - name: Get Latest Release Tag
-      id: get_latest_tag
-      run: |
-        latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v0.0.0")
-        echo "::set-output name=tag::$latest_tag"
-        
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        tag_name: ${{ steps.get_latest_tag.outputs.tag }}
-        release_name: Release ${{ steps.get_latest_tag.outputs.tag }}
-        draft: false
-        prerelease: true
-        body: |
-          This is an automated Pre-Release and has not been tested.
-          I inspect each change thoroughly before pushing to Github, 
-          You can always re-install Windows....
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./EimiBook.apbx
-        asset_name: EimiBook.apbx
-        asset_content_type: application/x-7z-compressed
+      - name: APBX boom
+        run: |
+          mv EimiBook.7z EimiBook.apbx
+
+      - name: Get Latest Release Tag
+        id: get_latest_tag
+        run: |
+          latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v0.0.0")
+          echo "::set-output name=tag::$latest_tag"
+
+      - name: Increment Tag
+        id: increment_tag
+        run: |
+          semver=( ${latest_tag//./ } )
+          major="${semver[0]}"
+          minor="${semver[1]}"
+          patch="${semver[2]}"
+          new_tag="${major}.${minor}.$(($patch + 1))"
+          echo "::set-output name=tag::$new_tag"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          tag_name: ${{ steps.increment_tag.outputs.tag }}
+          release_name: Release ${{ steps.increment_tag.outputs.tag }}
+          draft: false
+          prerelease: false
+          body: |
+            This is an automated Release and has not been tested.
+            I inspect each change thoroughly before pushing to Github, 
+            You can always re-install Windows....
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./EimiBook.apbx
+          asset_name: EimiBook.apbx
+          asset_content_type: application/x-7z-compressed
