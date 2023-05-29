@@ -24,6 +24,12 @@ jobs:
       run: |
         mv EimiBook.7z EimiBook.apbx
 
+    - name: Get Latest Release Tag
+      id: get_latest_tag
+      run: |
+        latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v0.0.0")
+        echo "::set-output name=tag::$latest_tag"
+        
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
