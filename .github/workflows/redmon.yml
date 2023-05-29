@@ -1,0 +1,49 @@
+name: push playbook
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: 7zip
+      run: |
+        sudo apt-get install p7zip-full -y
+
+    - name: Create .7z
+      run: |
+        7za a -p'malte' -mhe=on EimiBook.7z ./*
+
+    - name: APBX boom
+      run: |
+        mv EimiBook.7z EimiBook.apbx
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_latest_tag.outputs.tag }}
+        release_name: Release ${{ steps.get_latest_tag.outputs.tag }}
+        prerelease: 
+        body: |
+          This is an automated Pre-Release and has not been tested.
+          I inspect each change thoroughly before pushing to Github, 
+          You can always re-install Windows....
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./EimiBook.apbx
+        asset_name: EimiBook.apbx
+        asset_content_type: application/x-7z-compressed
