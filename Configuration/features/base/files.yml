@@ -652,8 +652,6 @@ actions:
   - !file:
     path: "%windir%\\System32\\en-US\\wuaueng.dll.mui"
   - !file:
-    path: "%windir%\\System32\\storewuauth.dll"
-  - !file:
     path: "%windir%\\System32\\wusa.exe"
   - !file:
     path: "%windir%\\SysWOW64\\wusa.exe"
