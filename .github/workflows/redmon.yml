@@ -31,37 +31,26 @@ jobs:
           latest_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "v0.0.0")
           echo "::set-output name=tag::$latest_tag"
 
-      - name: Increment Tag
-        id: increment_tag
-        run: |
-          semver=( ${latest_tag//./ } )
-          major="${semver[0]}"
-          minor="${semver[1]}"
-          patch="${semver[2]}"
-          new_tag="${major}.${minor}.$(($patch + 1))"
-          echo "::set-output name=tag::$new_tag"
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          tag_name: ${{ steps.increment_tag.outputs.tag }}
-          release_name: Release ${{ steps.increment_tag.outputs.tag }}
-          draft: false
-          prerelease: false
-          body: |
-            This is an automated Release and has not been tested.
-            I inspect each change thoroughly before pushing to Github, 
-            You can always re-install Windows....
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./EimiBook.apbx
-          asset_name: EimiBook.apbx
-          asset_content_type: application/x-7z-compressed
+- name: Post to Discord Webhook
+ env:
+    DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+  run: |
+    artifact_path="./EimiBook.apbx"
+    artifact_name="EimiBook.apbx"
+    
+    curl -H "Content-Type: application/json" -X POST -d '{
+      "content": "New artifact uploaded!",
+      "embeds": [
+        {
+          "title": "Artifact Details",
+          "description": "An artifact has been created for the latest release.",
+          "fields": [
+            {
+              "name": "Artifact Name",
+              "value": "'"$artifact_name"'"
+            }
+          ]
+        }
+      ],
+      "file": "'"$artifact_path"'"
+    }' "$DISCORD_WEBHOOK_URL"
