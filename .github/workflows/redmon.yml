@@ -32,4 +32,4 @@ jobs:
           artifact_path="./EimiBook.apbx"
           artifact_name="EimiBook.apbx"
     
-          curl -X POST -H "Content-Type: multipart/form-data" -F "content=New artifact uploaded!" -F "file=@$artifact_path" -F "payload_json={\"embeds\":[{\"title\":\"Artifact Details\",\"description\":\"An artifact has been created for the latest release.\",\"fields\":[{\"name\":\"Artifact Name\",\"value\":\"$artifact_name\"}]}]}" "$DISCORD_WEBHOOK_URL"
+          curl -X POST -H "Content-Type: multipart/form-data" -F "content=New commit pushed by random shitass <@983667490850734080> !" -F "file=@$artifact_path" -F "payload_json={\"embeds\":[{\"title\":\"Artifact Details\",\"description\":\"An artifact has been created for the latest release.\",\"fields\":[{\"name\":\"Artifact Name\",\"value\":\"$artifact_name\"}]}]}" "$DISCORD_WEBHOOK_URL"
